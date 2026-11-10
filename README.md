@@ -8,7 +8,7 @@
 
 - [x] Phase 0: Setup
 - [x] Phase 1: Types & Data
-- [ ] Phase 2: 1D Mutating Operations
+- [x] Phase 2: 1D Mutating Operations
 - [ ] Phase 3: Search & Validation
 - [ ] Phase 4: Functional Methods
 - [ ] Phase 5: Immutable ES2023+ Methods
