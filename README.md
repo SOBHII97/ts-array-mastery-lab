@@ -9,7 +9,7 @@
 - [x] Phase 0: Setup
 - [x] Phase 1: Types & Data
 - [x] Phase 2: 1D Mutating Operations
-- [ ] Phase 3: Search & Validation
+- [x] Phase 3: Search & Validation
 - [ ] Phase 4: Functional Methods
 - [ ] Phase 5: Immutable ES2023+ Methods
 - [ ] Phase 6: 2D Matrix (Shelf Grid)
