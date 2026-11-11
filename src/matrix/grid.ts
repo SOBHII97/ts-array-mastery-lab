@@ -1,24 +1,7 @@
 import type { ShelfCell } from "../interfaces/shelf.js";
+import { OutOfBoundsError, NegativeQuantityError } from "../errors/grid-errors.js";
 
-/**
- * Custom error thrown when grid coordinates are out of valid bounds.
- */
-export class OutOfBoundsError extends Error {
-    constructor(row: number, col: number) {
-        super(`Cell [${row}, ${col}] is outside the grid`);
-        this.name = "OutOfBoundsError";
-    }
-}
-
-/**
- * Custom error thrown when quantity is negative.
- */
-export class NegativeQuantityError extends Error {
-    constructor(quantity: number) {
-        super(`Quantity cannot be negative: ${quantity}`);
-        this.name = "NegativeQuantityError";
-    }
-}
+export { OutOfBoundsError, NegativeQuantityError };
 
 /**
  * Creates a 2D grid matrix representing warehouse shelves immutably.
@@ -80,7 +63,6 @@ export function placeProduct(
         throw new OutOfBoundsError(row, col);
     }
 
-    // Preserve the original cell's id using spread operator
     const updatedCell: ShelfCell = {
         ...targetCell,
         productId,
@@ -90,6 +72,7 @@ export function placeProduct(
     const newRow = targetRow.with(col, updatedCell);
     return grid.with(row, newRow);
 }
+
 /**
  * Finds the coordinates [row, col] of a product within the grid.
  *
