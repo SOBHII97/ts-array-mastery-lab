@@ -1,3 +1,7 @@
-const items = [3, 1, 2];
-const sorted = items.toSorted((a, b) => a - b);
-console.log("Smart Warehouse CLI is alive", { items, sorted, last: items.at(-1) });
+// src/index.ts
+import { startCli } from "./cli/menu.js";
+
+startCli().catch((err: unknown) => {
+    console.error("Fatal error:", err);
+    process.exitCode = 1;
+});
