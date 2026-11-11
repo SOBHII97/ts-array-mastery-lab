@@ -7,6 +7,7 @@ import {
     rotate90,
     flattenGrid,
 } from '../src/matrix/transforms.js';
+import { InvalidGridStructureError } from '../src/errors/grid-errors.js';
 
 const cell = (id: string, quantity: number): ShelfCell => ({
     id,
@@ -79,5 +80,15 @@ describe('Grid transforms', () => {
         expect(transpose([])).toEqual([]);
         expect(rotate90([])).toEqual([]);
         expect(flattenGrid([])).toEqual([]);
+    });
+
+    it('throws InvalidGridStructureError for ragged grids', () => {
+        const shortFirst = [[cell('a', 1)], [cell('b', 2), cell('c', 3)]];
+        const longFirst = [[cell('a', 1), cell('b', 2)], [cell('c', 3)]];
+
+        expect(() => colTotals(shortFirst)).toThrow(InvalidGridStructureError);
+        expect(() => colTotals(longFirst)).toThrow(InvalidGridStructureError);
+        expect(() => transpose(shortFirst)).toThrow(InvalidGridStructureError);
+        expect(() => rotate90(longFirst)).toThrow(InvalidGridStructureError);
     });
 });

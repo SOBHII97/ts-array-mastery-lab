@@ -1,45 +1,5 @@
 import type { ShelfCell } from "../interfaces/shelf.js";
-import { InvalidGridStructureError } from "../errors/grid-errors.js";
-
-export { InvalidGridStructureError };
-
-/**
- * Asserts that the grid is perfectly rectangular (uniform column count across all rows).
- *
- * @param grid - Current 2D grid of shelf cells.
- * @returns The expected column count.
- * @throws InvalidGridStructureError if the grid is ragged or malformed.
- *
- * Time Complexity: O(rows)
- * Space Complexity: O(1)
- */
-function assertRectangular(grid: readonly (readonly ShelfCell[])[]): number {
-    const cols = grid[0]?.length ?? 0;
-    for (let r = 0; r < grid.length; r++) {
-        const row = grid[r];
-        if (row === undefined || row.length !== cols) {
-            throw new InvalidGridStructureError(
-                `Row ${r} has ${row?.length ?? 0} cells, expected ${cols}`
-            );
-        }
-    }
-    return cols;
-}
-
-/**
- * Safely retrieves a cell at specified coordinates with defensive checks.
- */
-function cellAt(
-    grid: readonly (readonly ShelfCell[])[],
-    r: number,
-    c: number
-): ShelfCell {
-    const cell = grid[r]?.[c];
-    if (cell === undefined) {
-        throw new InvalidGridStructureError(`Missing cell at coordinates [${r}][${c}]`);
-    }
-    return cell;
-}
+import { assertRectangular, cellAt } from "./utils.js";
 
 /**
  * Calculates the total quantity for each row in the grid.
